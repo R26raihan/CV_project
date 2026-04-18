@@ -21,6 +21,11 @@
     @apply shadow-ambient;
   }
 
+  .intelligence-flow {
+    @apply bg-gradient-to-br from-primary to-secondary-container;
+    background: linear-gradient(135deg, #2402c1 0%, #39b8fd 100%);
+  }
+
   .material-symbols-outlined {
     font-family: var(--material-symbols-outlined);
     font-weight: normal;

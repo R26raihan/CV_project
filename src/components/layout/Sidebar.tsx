@@ -83,9 +83,13 @@ export default defineComponent({
         {/* Footer / Pro Section */}
         <div class="mt-auto pb-8">
           {isCollapsed.value ? (
-            <button class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform active:scale-95" title="Upgrade ke Pro">
+            <RouterLink 
+              to={{ name: 'app-premium' }}
+              class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform active:scale-95" 
+              title="Upgrade ke Pro"
+            >
               <span class="material-symbols-outlined text-white" style={{ fontVariationSettings: "'FILL' 1" }}>workspace_premium</span>
-            </button>
+            </RouterLink>
           ) : (
             <div class="bg-surface-container-highest/50 rounded-2xl p-4 border border-outline-variant/10 group cursor-pointer hover:border-primary/20 transition-all">
               <div class="flex items-center gap-3 mb-3">
@@ -98,9 +102,12 @@ export default defineComponent({
                 </div>
               </div>
               <p class="text-[11px] text-on-surface-variant mb-4 leading-relaxed">Dapatkan analisis tanpa batas & template eksklusif.</p>
-              <button class="w-full py-2 px-3 bg-white text-on-surface text-xs font-bold rounded-lg border border-outline-variant/30 hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-[0.98]">
+              <RouterLink 
+                to={{ name: 'app-premium' }}
+                class="w-full py-2 px-3 bg-white text-on-surface text-xs font-bold rounded-lg border border-outline-variant/30 hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-[0.98] flex items-center justify-center"
+              >
                 Upgrade Sekarang
-              </button>
+              </RouterLink>
             </div>
           )}
         </div>

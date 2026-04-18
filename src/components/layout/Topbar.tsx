@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue'
+import { RouterLink } from 'vue-router'
 
 export default defineComponent({
   name: 'Topbar',
@@ -9,9 +10,12 @@ export default defineComponent({
           <h2 class="text-xl font-bold text-on-surface tracking-tight hidden md:block">Gallery</h2>
         </div>
         <div class="flex items-center gap-4">
-          <button class="hidden md:block text-sm font-semibold text-primary hover:bg-surface-tint/10 px-4 py-2 rounded-full transition-colors active:scale-95 duration-150">
+          <RouterLink 
+            to={{ name: 'app-premium' }}
+            class="hidden md:block text-sm font-semibold text-primary hover:bg-surface-tint/10 px-4 py-2 rounded-full transition-colors active:scale-95 duration-150"
+          >
             Upgrade ke Pro
-          </button>
+          </RouterLink>
           <div class="flex items-center gap-2">
             <button class="p-2 text-on-surface-variant hover:bg-surface-container hover:text-primary rounded-full transition-colors active:scale-95 duration-150 relative">
               <span class="material-symbols-outlined">notifications</span>

@@ -8,6 +8,10 @@ import academicImg from '../../assets/academic_grid/academic_grid.png'
 import onyxImg from '../../assets/premium_onyx.png'
 import timelineImg from '../../assets/timeline_master.png'
 import serifImg from '../../assets/minimalist_serif.png'
+import luxeImg from '../../assets/luxe_editorial_thumbnail_1776514507654.png'
+import slateImg from '../../assets/corporate_slate.png'
+import nordicImg from '../../assets/nordic_horizon.png'
+import swissImg from '../../assets/swiss_minimalist.png'
 
 export default defineComponent({
   name: 'Toolbox',
@@ -400,14 +404,14 @@ export default defineComponent({
                                   </div>
 
                                   <div class="space-y-2">
-                                    {exp.description.map((desc, idx) => (
+                                    {exp.description.map((_, idx) => (
                                       <div key={idx} class="group/bullet flex items-start gap-2 rounded-xl hover:bg-white hover:shadow-sm transition-all border border-transparent hover:border-outline-variant/20 p-2">
-                                        <span class="mt-[11px] w-1.5 h-1.5 rounded-full bg-primary/40 shrink-0"></span>
+                                        <div class="mt-[11px] w-1.5 h-1.5 rounded-full bg-primary/40 shrink-0"></div>
                                         <textarea 
-                                          class="flex-1 bg-transparent p-0 text-sm font-medium text-on-surface focus:ring-0 outline-none resize-none leading-relaxed placeholder:text-on-surface-variant/30" 
+                                          class="flex-1 bg-transparent p-0 text-sm font-medium text-on-surface focus:ring-0 outline-none resize-none leading-relaxed placeholder:text-on-surface-variant/30 min-h-[1.5rem]" 
                                           rows="1"
                                           placeholder="Deskripsikan tanggung jawab Anda..."
-                                          value={desc}
+                                          value={exp.description[idx]}
                                           onInput={(e: any) => {
                                             cvStore.updateExperienceDescription(exp.id, idx, e.target.value);
                                             e.target.style.height = 'auto';
@@ -415,8 +419,11 @@ export default defineComponent({
                                           }}
                                           ref={(el: any) => {
                                             if (el) {
-                                              el.style.height = 'auto';
-                                              el.style.height = el.scrollHeight + 'px';
+                                              // Gunakan setTimeout sedikit agar rendering selesai sebelum hitung tinggi
+                                              setTimeout(() => {
+                                                el.style.height = 'auto';
+                                                el.style.height = el.scrollHeight + 'px';
+                                              }, 0);
                                             }
                                           }}
                                         ></textarea>
@@ -561,51 +568,6 @@ export default defineComponent({
                 </div>
               )}
 
-              {/* TOOL: PROGRESS */}
-              {activeTool.value === 'progress' && (
-                <div class="space-y-10 text-left animate-in fade-in slide-in-from-right-4 duration-500">
-                  <header class="flex justify-between items-start border-b border-outline-variant/10 pb-6">
-                    <div class="space-y-1">
-                      <h3 class="text-sm font-black text-on-surface tracking-[0.2em] uppercase">Monitor Kesiapan</h3>
-                      <p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-wider">Kualitas CV Anda saat ini</p>
-                    </div>
-                    <button 
-                      onClick={() => isToolboxOpen.value = false}
-                      class="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors"
-                    >
-                      <span class="material-symbols-outlined text-xl">close</span>
-                    </button>
-                  </header>
-                  <div class="space-y-10">
-                    <div class="bg-primary/5 rounded-3xl p-8 text-center space-y-4 border border-primary/10">
-                       <div class="text-5xl font-black text-primary tracking-tighter">65<span class="text-2xl font-bold opacity-60">%</span></div>
-                       <div class="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                          <div style={{ width: '65%' }} class="h-full bg-primary rounded-full shadow-[0_0_20px_rgba(37,99,235,0.3)]"></div>
-                       </div>
-                       <p class="text-[10px] font-black text-primary uppercase tracking-widest">Kualitas Sangat Baik</p>
-                    </div>
-                    
-                    <div class="space-y-4">
-                      <label class="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">Daftar Periksa</label>
-                      <div class="space-y-3">
-                        {[
-                          { name: 'Detail Pribadi', complete: true },
-                          { name: 'Deskripsi Karir', complete: true },
-                          { name: 'Pengalaman Terakhir', complete: true },
-                          { name: 'Daftar Kompetensi', complete: false }
-                        ].map(step => (
-                          <div key={step.name} class="flex items-center justify-between p-5 rounded-2xl bg-surface-container-low/50 border border-outline-variant/5">
-                            <span class={`text-[11px] font-black tracking-tight ${step.complete ? 'text-on-surface' : 'text-on-surface-variant'}`}>{step.name}</span>
-                            <span class={`material-symbols-outlined text-lg ${step.complete ? 'text-success' : 'text-outline-variant opacity-20'}`}>
-                              {step.complete ? 'check_circle' : 'radio_button_unchecked'}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* TOOL: STYLE */}
               {activeTool.value === 'style' && (
@@ -681,7 +643,89 @@ export default defineComponent({
                         )}
                        </div>
                     </div>
-                    <div class="space-y-4 pt-4 border-t border-outline-variant/10">
+
+                    {/* SEKSI: TEMA & WARNA */}
+                    <div class="space-y-6 pt-6 border-t border-outline-variant/10">
+                      <div class="flex justify-between items-center">
+                        <label class="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Warna Aksen</label>
+                        <div class="flex items-center gap-2">
+                           <div 
+                             class="w-6 h-6 rounded-full border-2 border-white shadow-sm" 
+                             style={{ backgroundColor: ui.value.accentColor }}
+                           ></div>
+                           <input 
+                              type="text"
+                              value={ui.value.accentColor}
+                              onInput={(e: any) => cvStore.ui.accentColor = e.target.value}
+                              class="w-20 bg-surface-container-low border border-outline-variant/10 rounded px-2 py-1 text-[10px] uppercase font-bold outline-none focus:border-primary/30"
+                           />
+                           <div class="relative group/color">
+                              <input 
+                                type="color"
+                                value={ui.value.accentColor}
+                                onInput={(e: any) => cvStore.ui.accentColor = e.target.value}
+                                class="w-8 h-8 rounded-lg border-0 cursor-pointer opacity-0 absolute inset-0 z-10"
+                              />
+                              <div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-on-surface-variant group-hover/color:bg-primary/10 group-hover/color:text-primary transition-all">
+                                <span class="material-symbols-outlined text-sm">colorize</span>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+
+                      <div class="grid grid-cols-8 gap-3">
+                        {[
+                          '#111827', '#6366f1', '#3b82f6', '#0ea5e9', 
+                          '#10b981', '#f59e0b', '#f43f5e', '#8b5cf6'
+                        ].map(color => (
+                          <button 
+                            key={color}
+                            onClick={() => cvStore.ui.accentColor = color}
+                            class={`w-full aspect-square rounded-full border-2 transition-all hover:scale-110 active:scale-95 ${ui.value.accentColor.toLowerCase() === color.toLowerCase() ? 'border-primary ring-2 ring-primary/20 scale-110' : 'border-transparent'}`}
+                            style={{ backgroundColor: color }}
+                          ></button>
+                        ))}
+                      </div>
+
+                      <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                          <label class="text-[9px] font-black text-on-surface-variant uppercase tracking-widest">Opasitas Warna</label>
+                          <span class="text-[9px] font-bold text-primary">{ui.value.accentOpacity}%</span>
+                        </div>
+                        <input 
+                          type="range"
+                          min="10"
+                          max="100"
+                          step="5"
+                          value={ui.value.accentOpacity}
+                          onInput={(e: any) => cvStore.ui.accentOpacity = parseInt(e.target.value)}
+                          class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary"
+                        />
+                      </div>
+                    </div>
+
+                    {/* SEKSI: BENTUK & SUDUT */}
+                    <div class="space-y-6 pt-6 border-t border-outline-variant/10 pb-4">
+                      <label class="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Bentuk & Sudut</label>
+                      <div class="grid grid-cols-3 gap-2">
+                        {[
+                          { label: 'Siku', value: 0, icon: 'square' },
+                          { label: 'Soft', value: 16, icon: 'rounded_corner' },
+                          { label: 'Bulat', value: 40, icon: 'circle' }
+                        ].map(corner => (
+                          <button 
+                            key={corner.value}
+                            onClick={() => cvStore.ui.borderRadius = corner.value}
+                            class={`p-3 rounded-xl border flex flex-col items-center gap-2 transition-all group ${ui.value.borderRadius === corner.value ? 'bg-primary border-primary text-white' : 'border-outline-variant/10 hover:border-primary/20 bg-white/50 text-on-surface-variant'}`}
+                          >
+                            <span class="material-symbols-outlined text-lg">{corner.icon}</span>
+                            <span class="text-[9px] font-black uppercase tracking-widest">{corner.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div class="space-y-4 pt-6 border-t border-outline-variant/10">
                       <label class="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Struktur Layout</label>
                       <div class="grid grid-cols-2 gap-3">
                         {[
@@ -733,6 +777,10 @@ export default defineComponent({
                       { name: 'Premium Onyx', desc: 'Dark Header Premium', image: onyxImg, tags: ['Terbaru', 'Eksklusif'] },
                       { name: 'Timeline Master', desc: 'Visual Garis Waktu', image: timelineImg, tags: ['Terbaru', 'Dinamis'] },
                       { name: 'Minimalist Serif', desc: 'Editorial & Elegan', image: serifImg, tags: ['Terbaru', 'Klasik'] },
+                      { name: 'Luxe Editorial', desc: 'Magazine Style', image: luxeImg, tags: ['Premium', 'Fashion'] },
+                      { name: 'Corporate Slate', desc: 'Bersih & Profesional', image: slateImg, tags: ['Terbaru', 'Bisnis'] },
+                      { name: 'Nordic Horizon', desc: 'Minimalis & Airy', image: nordicImg, tags: ['Terbaru', 'Elegan'] },
+                      { name: 'Swiss Minimalist', desc: 'Presisi & Jelas', image: swissImg, tags: ['Terbaru', 'Grid'] },
                     ].map(tmpl => (
                       <div 
                         key={tmpl.name} 
@@ -799,7 +847,6 @@ export default defineComponent({
             { id: 'content', icon: 'edit_note', title: 'Konten' },
             { id: 'style', icon: 'palette', title: 'Gaya' },
             { id: 'template', icon: 'dashboard_customize', title: 'Desain' },
-            { id: 'progress', icon: 'donut_large', title: 'Skor' },
             { id: 'ai', icon: 'auto_awesome', title: 'AI' }
           ].map(tool => (
             <button 

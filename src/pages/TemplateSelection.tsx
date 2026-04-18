@@ -9,6 +9,10 @@ import academicImg from '../assets/academic_grid/academic_grid.png'
 import onyxImg from '../assets/premium_onyx.png'
 import timelineImg from '../assets/timeline_master.png'
 import serifImg from '../assets/minimalist_serif.png'
+import luxeImg from '../assets/luxe_editorial_thumbnail_1776514507654.png'
+import slateImg from '../assets/corporate_slate.png'
+import nordicImg from '../assets/nordic_horizon.png'
+import swissImg from '../assets/swiss_minimalist.png'
 
 export default defineComponent({
   name: 'TemplateSelection',
@@ -115,6 +119,54 @@ export default defineComponent({
         image: serifImg,
         isPro: true,
         tags: ['Terbaru', 'Elegan']
+      },
+      {
+        id: 'Luxe Editorial',
+        name: 'Luxe Editorial',
+        category: 'Minimalis',
+        description: 'Desain ala majalah fashion kelas atas. Fokus pada ruang putih luas dan keanggunan tipografi serif.',
+        themeColor: 'from-amber-50 to-orange-100',
+        accentColor: '#1a1a1a',
+        icon: 'auto_stories',
+        image: luxeImg,
+        isPro: true,
+        tags: ['Premium', 'Luxury']
+      },
+      {
+        id: 'Corporate Slate',
+        name: 'Corporate Slate',
+        category: 'Profesional',
+        description: 'Sangat rapi, terstruktur, dan formal. Cocok untuk profesional korporat yang menginginkan kesan kuat namun minimalis.',
+        themeColor: 'from-slate-700 to-slate-900',
+        accentColor: '#334155',
+        icon: 'business_center',
+        image: slateImg,
+        isPro: true,
+        tags: ['Terbaru', 'Bisnis']
+      },
+      {
+        id: 'Nordic Horizon',
+        name: 'Nordic Horizon',
+        category: 'Minimalis',
+        description: 'Mengedepankan whitespace dan tipografi halus untuk kesan yang tenang, bersih, dan sangat modern.',
+        themeColor: 'from-blue-50 to-indigo-100',
+        accentColor: '#475569',
+        icon: 'filter_hdr',
+        image: nordicImg,
+        isPro: false,
+        tags: ['Terbaru', 'Elegan']
+      },
+      {
+        id: 'Swiss Minimalist',
+        name: 'Swiss Minimalist',
+        category: 'Minimalis',
+        description: 'Layout berbasis grid asimetris yang presisi. Fokus pada keterbacaan tinggi dan fungsionalitas desain.',
+        themeColor: 'from-zinc-100 to-zinc-300',
+        accentColor: '#18181b',
+        icon: 'grid_view',
+        image: swissImg,
+        isPro: true,
+        tags: ['Terbaru', 'Grid']
       }
     ]
 

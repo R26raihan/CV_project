@@ -119,6 +119,8 @@ export const useCVStore = defineStore('cv', {
       zoom: 100,
       activeTemplate: 'Executive Minimal',
       accentColor: '#111827',
+      accentOpacity: 100,
+      borderRadius: 16,
       typography: 'Modern (Sans)',
       layoutColumns: 2,
       sidebarCollapsed: true

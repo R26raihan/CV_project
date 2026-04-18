@@ -11,9 +11,10 @@ import AcademicGrid from './templates/AcademicGrid'
 import PremiumOnyx from './templates/PremiumOnyx'
 import TimelineMaster from './templates/TimelineMaster'
 import MinimalistSerif from './templates/MinimalistSerif'
-import IndustrialTech from './templates/IndustrialTech'
 import LuxeEditorial from './templates/LuxeEditorial'
-import GeometricBold from './templates/GeometricBold'
+import CorporateSlate from './templates/CorporateSlate'
+import NordicHorizon from './templates/NordicHorizon'
+import SwissMinimalist from './templates/SwissMinimalist'
 
 export default defineComponent({
   name: 'CVPreview',
@@ -33,9 +34,10 @@ export default defineComponent({
       'Premium Onyx': PremiumOnyx,
       'Timeline Master': TimelineMaster,
       'Minimalist Serif': MinimalistSerif,
-      'Industrial Tech': IndustrialTech,
       'Luxe Editorial': LuxeEditorial,
-      'Geometric Bold': GeometricBold
+      'Corporate Slate': CorporateSlate,
+      'Nordic Horizon': NordicHorizon,
+      'Swiss Minimalist': SwissMinimalist
     }
 
     const fontMap: Record<string, string> = {
@@ -93,8 +95,127 @@ export default defineComponent({
       }
     })
 
+    const readinessSteps = computed(() => {
+      const activeCV = cvStore.activeCV
+      return [
+        { 
+          id: 1, 
+          name: 'Identitas', 
+          isComplete: !!(activeCV.firstName && activeCV.email && activeCV.phone && activeCV.professionalTitle),
+          icon: 'person'
+        },
+        { 
+          id: 2, 
+          name: 'Ringkasan', 
+          isComplete: (activeCV.summary?.length || 0) > 20,
+          icon: 'history_edu'
+        },
+        { 
+          id: 3, 
+          name: 'Pengalaman', 
+          isComplete: activeCV.experience.length > 0,
+          icon: 'work'
+        },
+        { 
+          id: 4, 
+          name: 'Keahlian', 
+          isComplete: activeCV.skills.length >= 3,
+          icon: 'verified'
+        }
+      ]
+    })
+
+    const totalScore = computed(() => {
+      const completed = readinessSteps.value.filter(s => s.isComplete).length
+      return Math.round((completed / readinessSteps.value.length) * 100)
+    })
+
+    const showStepper = ref(true)
+
     return () => (
-      <section class="flex-1 bg-surface-container-lowest/50 overflow-y-auto p-12 flex justify-center relative bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] scroll-smooth">
+      <section class="flex-1 bg-surface-container-lowest/50 overflow-y-auto p-12 flex flex-col items-center relative bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:24px_24px] scroll-smooth">
+        
+        {/* MONITOR KESIAPAN STEPPER (WITH SHOW/HIDE) */}
+        <div class="w-full max-w-[850px] mb-8 animate-in fade-in slide-in-from-top-4 duration-700 relative z-30">
+           {showStepper.value ? (
+             <div class="bg-white/40 backdrop-blur-3xl border border-white/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] rounded-full px-4 py-2 flex items-center justify-between gap-6 group/stepper hover:bg-white/60 transition-all duration-500">
+                
+                {/* Score Display (Small) */}
+                <div class="flex items-center gap-3 pl-2 border-r border-black/5 pr-6 shrink-0">
+                   <div class="relative w-10 h-10 flex items-center justify-center">
+                      <svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+                        <circle class="text-black/5" stroke-width="10" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50"/>
+                        <circle 
+                          class="text-primary transition-all duration-1000 ease-out" 
+                          stroke-width="10" 
+                          stroke-dasharray={251.2} 
+                          stroke-dashoffset={251.2 - (251.2 * totalScore.value) / 100} 
+                          stroke-linecap="round" 
+                          stroke="currentColor" 
+                          fill="transparent" 
+                          r="40" cx="50" cy="50"
+                        />
+                      </svg>
+                      <span class="absolute text-[10px] font-black text-primary">{totalScore.value}%</span>
+                   </div>
+                   <div class="hidden sm:block">
+                      <div class="text-[9px] font-black text-on-surface uppercase tracking-[0.1em]">Kesiapan</div>
+                      <div class="text-[8px] font-bold text-on-surface-variant uppercase tracking-widest opacity-50 leading-none">
+                         {totalScore.value === 100 ? 'Siap!' : 'Draft'}
+                      </div>
+                   </div>
+                </div>
+
+                {/* Steps Layout (Compact) */}
+                <div class="flex-1 flex justify-between items-center relative gap-4 pr-2">
+                   <div class="absolute left-4 right-4 h-0.5 bg-black/5 top-1/2 -translate-y-1/2 -z-10">
+                      <div 
+                        class="h-full bg-primary/20 transition-all duration-1000 ease-out" 
+                        style={{ width: `${Math.max(0, (readinessSteps.value.filter(s => s.isComplete).length - 1) / (readinessSteps.value.length - 1) * 100)}%` }}
+                      ></div>
+                   </div>
+
+                   {readinessSteps.value.map((step) => (
+                     <div key={step.id} class="flex items-center gap-2 group/step">
+                        <div 
+                          class={`w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-500 shadow-sm border
+                            ${step.isComplete 
+                              ? 'bg-primary text-white border-primary shadow-primary/20 scale-105' 
+                              : 'bg-white border-black/5 text-on-surface-variant opacity-60 group-hover/step:opacity-100 group-hover/step:border-primary/30'}`}
+                        >
+                           <span class="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: step.isComplete ? "'FILL' 1" : "" }}>
+                             {step.isComplete ? 'check_circle' : step.icon}
+                           </span>
+                        </div>
+                        <span class={`text-[8px] font-black uppercase tracking-widest transition-colors duration-500 whitespace-nowrap hidden lg:block ${step.isComplete ? 'text-primary' : 'text-on-surface-variant'}`}>
+                           {step.name}
+                        </span>
+                     </div>
+                   ))}
+                </div>
+
+                {/* Close Button */}
+                <button 
+                  onClick={() => showStepper.value = false}
+                  class="w-8 h-8 rounded-full hover:bg-black/5 flex items-center justify-center text-on-surface-variant/40 hover:text-on-surface transition-all"
+                >
+                  <span class="material-symbols-outlined text-lg">expand_less</span>
+                </button>
+             </div>
+           ) : (
+             <button 
+               onClick={() => showStepper.value = true}
+               class="mx-auto flex items-center gap-3 px-6 py-2 bg-white/40 backdrop-blur-xl border border-white/60 rounded-full shadow-sm hover:bg-white/60 transition-all duration-500 animate-in fade-in slide-in-from-top-2"
+             >
+               <div class="flex items-center gap-2">
+                 <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                 <span class="text-[9px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Lihat Kesiapan CV</span>
+               </div>
+               <span class="material-symbols-outlined text-sm opacity-30">expand_more</span>
+             </button>
+           )}
+        </div>
+
         {/* Dynamic A4 Canvas Container */}
         <div 
           ref={cvRef}

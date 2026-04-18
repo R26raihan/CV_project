@@ -51,6 +51,11 @@ const router = createRouter({
           path: 'export',
           name: 'app-export',
           component: () => import('../pages/Export.tsx')
+        },
+        {
+          path: 'premium',
+          name: 'app-premium',
+          component: () => import('../pages/Premium.tsx')
         }
       ]
     }
