@@ -226,7 +226,7 @@ export default defineComponent({
 
           {/* Template Grid */}
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredTemplates.value.map((tpl, index) => (
+            {filteredTemplates.value.map((tpl, _index) => (
               <div 
                 key={tpl.id}
                 class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10"

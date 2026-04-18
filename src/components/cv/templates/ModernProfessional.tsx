@@ -1,4 +1,4 @@
-import { type TemplateProps, ExperienceItem, SkillsGrid } from '../TemplateShared'
+import { type TemplateProps, ExperienceItem } from '../TemplateShared'
 
 export default function ModernProfessional({ cv, ui, activeFont }: TemplateProps) {
   const color = ui.accentColor

@@ -1,4 +1,4 @@
-import { defineComponent, computed } from 'vue'
+import { defineComponent } from 'vue'
 import { RouterView } from 'vue-router'
 import { useCVStore } from '../../store/cv'
 import Sidebar from './Sidebar.tsx'
@@ -8,7 +8,7 @@ export default defineComponent({
   name: 'MainLayout',
   setup() {
     const cvStore = useCVStore()
-    const isCollapsed = computed(() => cvStore.ui.sidebarCollapsed)
+    void cvStore // suppress unused warning
 
     return () => (
       <div class="h-screen flex overflow-hidden bg-surface">

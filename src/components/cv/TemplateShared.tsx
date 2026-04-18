@@ -1,4 +1,4 @@
-import { defineComponent, type PropType } from 'vue'
+// No imports needed - this file only exports JSX functions
 
 // Shared Props Interfaces
 export interface TemplateProps {
@@ -38,7 +38,7 @@ export const SkillsGrid = ({ skills, color }: { skills: string[], color: string 
 )
 
 // 3. Certification Item
-export const CertificationItem = ({ cert, color }: { cert: any, color: string }) => (
+export const CertificationItem = ({ cert, color: _color }: { cert: any, color: string }) => (
   <div key={cert.id} class="flex justify-between items-baseline mb-4 last:mb-0 gap-4 break-words">
     <div class="min-w-0">
       <h4 class="text-sm font-black text-on-surface uppercase tracking-tight break-words">{cert.name}</h4>

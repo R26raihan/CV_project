@@ -1,16 +1,6 @@
-import { type TemplateProps, ExperienceItem, SkillsGrid, CertificationItem } from '../TemplateShared'
+import { type TemplateProps, ExperienceItem, CertificationItem } from '../TemplateShared'
 
 export default function CreativeBlock({ cv, ui, activeFont }: TemplateProps) {
-  // Helper to apply opacity to hex
-  const hexToRGBA = (hex: string, opacity: number) => {
-    // Basic hex to rgba conversion
-    const normalizedHex = hex.startsWith('#') ? hex : '#111827'
-    const r = parseInt(normalizedHex.slice(1, 3), 16) || 0
-    const g = parseInt(normalizedHex.slice(3, 5), 16) || 0
-    const b = parseInt(normalizedHex.slice(5, 7), 16) || 0
-    return `rgba(${r}, ${g}, ${b}, ${opacity / 100})`
-  }
-
   const borderRadiusStyle = `${ui.borderRadius}px`
 
   return (
