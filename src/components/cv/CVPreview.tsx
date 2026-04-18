@@ -11,6 +11,9 @@ import AcademicGrid from './templates/AcademicGrid'
 import PremiumOnyx from './templates/PremiumOnyx'
 import TimelineMaster from './templates/TimelineMaster'
 import MinimalistSerif from './templates/MinimalistSerif'
+import IndustrialTech from './templates/IndustrialTech'
+import LuxeEditorial from './templates/LuxeEditorial'
+import GeometricBold from './templates/GeometricBold'
 
 export default defineComponent({
   name: 'CVPreview',
@@ -29,7 +32,10 @@ export default defineComponent({
       'Academic Grid': AcademicGrid,
       'Premium Onyx': PremiumOnyx,
       'Timeline Master': TimelineMaster,
-      'Minimalist Serif': MinimalistSerif
+      'Minimalist Serif': MinimalistSerif,
+      'Industrial Tech': IndustrialTech,
+      'Luxe Editorial': LuxeEditorial,
+      'Geometric Bold': GeometricBold
     }
 
     const fontMap: Record<string, string> = {
