@@ -1,0 +1,14 @@
+[build]
+  # Perintah untuk membuild aplikasi
+  command = "npm run build"
+  # Folder hasil build yang akan dipublish (Vite biasanya menggunakan 'dist')
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  # Mengarahkan semua request ke index.html agar routing SPA (Vue Router) berfungsi
+  from = "/*"
+  to = "/index.html"
+  status = 200
